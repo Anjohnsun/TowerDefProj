@@ -18,6 +18,9 @@ public class ATower : MonoBehaviour
     protected TowerHandler _towerHandler;
     protected TowerUI _towerUI;
 
+    [SerializeField] private AudioSource _shootSound;
+    [SerializeField] private AudioSource _upgradeSound;
+
     private void Start()
     {
         _timeToShoot = _towerHandler.StormtrooperUpgrades["shootDelay"][_shootDelayLevel].x;
@@ -62,18 +65,12 @@ public class ATower : MonoBehaviour
             _towerHandler.StormtrooperUpgrades["bulletSize"][_bulletSizeLevel].x, 
             _towerHandler.StormtrooperUpgrades["bulletSpeed"][_bulletSpeedLevel].x, 
             transform.position, transform.rotation);
+
+        _shootSound.Play();
     }
 
     public virtual void TryBuyUpgrade(int v)
     {
-        switch (v)
-        {
-            case 0:
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-        }
+        _upgradeSound.Play();
     }
 }

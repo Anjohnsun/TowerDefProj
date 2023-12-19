@@ -9,6 +9,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject _winPanel;
     [SerializeField] private GameObject _losePanel;
 
+    [SerializeField] private AudioSource _winSound;
+    [SerializeField] private AudioSource _loseSound;
+
     private void Start()
     {
         EnemySpawner._OnKilledEnemy += CheckWin;
@@ -16,6 +19,7 @@ public class LevelManager : MonoBehaviour
     public void Win()
     {
         _winPanel.SetActive(true);
+        _winSound.Play();
     }
 
     public void CheckWin(int enemyNumber)
@@ -28,6 +32,7 @@ public class LevelManager : MonoBehaviour
     public void Lose()
     {
         _losePanel.SetActive(true);
+        _loseSound.Play();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -13,6 +13,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private EnemyRoad _enemyRoad;
     private static EnemyRoad _road;
 
+    [SerializeField] private AudioSource _deathSound;
+    [SerializeField] private AudioSource _damageSound;
+
     public int CostHP => _costHP;
 
     private void Start()
@@ -44,12 +47,16 @@ public class Enemy : MonoBehaviour
         _health -= dmg;
         if (_health <= 0)
             Dye();
+        else
+            _damageSound.Play();
     }
 
     private void Dye()
     {
         MoneyHandler.Instance.AddMoney(_costGold);
         Destroy(gameObject);
+
+        _deathSound.Play();
 
         EnemySpawner._numberOfEnemies--;
         EnemySpawner._OnKilledEnemy(EnemySpawner._numberOfEnemies);
