@@ -14,7 +14,9 @@ public class TowerHandler : MonoBehaviour
     [SerializeField] private GameObject _rocketPrefab;
     [SerializeField] private GameObject _sniperPrefab;
 
-    [SerializeField] private BulletPool _bulletPool;
+    [SerializeField] private BulletPool _stormTrpperBulletPool;
+    [SerializeField] private BulletPool _rocketBulletPool;
+    [SerializeField] private BulletPool _sniperBulletPool;
 
     [SerializeField] public MoneyHandler _money;
 
@@ -45,7 +47,6 @@ public class TowerHandler : MonoBehaviour
                 _activeTower.right = _pointer.position - _activeTower.position;
 
                 DOTween.To(() => _activeTower.right, x => _activeTower.right = x, _pointer.position - _activeTower.position, 0.3f);
-                _activeTower = null;
             }
         }
 
@@ -62,6 +63,11 @@ public class TowerHandler : MonoBehaviour
                 _towerUI.ShowBuildTowerPanel();
             }
         }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            if (_activeTower != null)
+                _activeTower.GetComponent<ATower>().ShowPanelWithParams();
+        }
     }
 
     public void BuildTower(Type _towerType)
@@ -70,24 +76,31 @@ public class TowerHandler : MonoBehaviour
         if (_towerType == typeof(StormtrooperTower))
         {
             if (_money.TrySpendMoney(_stormtrooperPrefab.GetComponent<StormtrooperTower>().Cost))
+            {
                 tower = Instantiate(_stormtrooperPrefab, _pointer.position, Quaternion.identity);
+                tower.GetComponent<ATower>().Construct(_stormTrpperBulletPool, this, _towerUI);
+            }
         }
         else if (_towerType == typeof(RocketTower))
         {
             if (_money.TrySpendMoney(_rocketPrefab.GetComponent<RocketTower>().Cost))
+            {
                 tower = Instantiate(_rocketPrefab, _pointer.position, Quaternion.identity);
+                tower.GetComponent<ATower>().Construct(_rocketBulletPool, this, _towerUI);
+            }
         }
         else if (_towerType == typeof(SniperTower))
         {
             if (_money.TrySpendMoney(_sniperPrefab.GetComponent<SniperTower>().Cost))
+            {
                 tower = Instantiate(_sniperPrefab, _pointer.position, Quaternion.identity);
+                tower.GetComponent<ATower>().Construct(_sniperBulletPool, this, _towerUI);
+            }
         }
         else
         {
             Debug.Log("Wrong type of tower");
         }
-
-        tower.GetComponent<ATower>().Construct(_bulletPool, this, _towerUI);
     }
 
     private void OnDrawGizmos()

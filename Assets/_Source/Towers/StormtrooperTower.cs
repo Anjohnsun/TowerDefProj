@@ -7,9 +7,6 @@ public class StormtrooperTower : ATower
     protected virtual void OnMouseDown()
     {
         TowerHandler._activeTower = transform;
-        _towerUI.ShowUpgradePanel("Урон", _towerHandler.StormtrooperUpgrades["damage"][_damageLevel + 1],
-            "Скорострельность", _towerHandler.StormtrooperUpgrades["shootDelay"][_shootDelayLevel + 1],
-            "Скорость пуль", _towerHandler.StormtrooperUpgrades["bulletSpeed"][_bulletSpeedLevel + 1], this);
     }
 
     public override void TryBuyUpgrade(int v)

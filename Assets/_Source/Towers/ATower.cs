@@ -41,10 +41,6 @@ public class ATower : MonoBehaviour
     protected virtual void OnMouseDown()
     {
         TowerHandler._activeTower = transform;
-
-        _towerUI.ShowUpgradePanel("Урон", _towerHandler.StormtrooperUpgrades["damage"][_damageLevel + 1],
-            "Скорострельность", _towerHandler.StormtrooperUpgrades["shootDelay"][_shootDelayLevel + 1],
-            "Скорость пуль", _towerHandler.StormtrooperUpgrades["bulletSpeed"][_bulletSpeedLevel + 1], this);
     }
 
     protected void Update()
@@ -72,5 +68,14 @@ public class ATower : MonoBehaviour
     public virtual void TryBuyUpgrade(int v)
     {
         _upgradeSound.Play();
+    }
+
+    public virtual void ShowPanelWithParams()
+    {
+        Debug.Log("show panel");
+
+        _towerUI.ShowUpgradePanel("Урон", _towerHandler.StormtrooperUpgrades["damage"][_damageLevel + 1],
+            "Скорострельность", _towerHandler.StormtrooperUpgrades["shootDelay"][_shootDelayLevel + 1],
+            "Скорость пуль", _towerHandler.StormtrooperUpgrades["bulletSpeed"][_bulletSpeedLevel + 1], this);
     }
 }

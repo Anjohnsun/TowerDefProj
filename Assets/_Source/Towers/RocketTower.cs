@@ -7,9 +7,6 @@ public class RocketTower : ATower
     protected virtual void OnMouseDown()
     {
         TowerHandler._activeTower = transform;
-        _towerUI.ShowUpgradePanel("Урон", _towerHandler.RocketUpgrades["bulletSize"][_bulletSizeLevel + 1],
-            "Скорострельность", _towerHandler.RocketUpgrades["shootDelay"][_shootDelayLevel + 1],
-            "Скорость пуль", _towerHandler.RocketUpgrades["bulletSpeed"][_bulletSpeedLevel + 1], this);
     }
 
     public override void TryBuyUpgrade(int v)
@@ -50,5 +47,12 @@ public class RocketTower : ATower
             _towerHandler.RocketUpgrades["bulletSize"][_bulletSizeLevel].x,
             _towerHandler.RocketUpgrades["bulletSpeed"][_bulletSpeedLevel].x,
             transform.position, transform.rotation);
+    }
+
+    public override void ShowPanelWithParams()
+    {
+        _towerUI.ShowUpgradePanel("Урон", _towerHandler.RocketUpgrades["bulletSize"][_bulletSizeLevel + 1],
+            "Скорострельность", _towerHandler.RocketUpgrades["shootDelay"][_shootDelayLevel + 1],
+            "Скорость пуль", _towerHandler.RocketUpgrades["bulletSpeed"][_bulletSpeedLevel + 1], this);
     }
 }

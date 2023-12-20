@@ -7,9 +7,6 @@ public class SniperTower : ATower
     protected virtual void OnMouseDown()
     {
         TowerHandler._activeTower = transform;
-        _towerUI.ShowUpgradePanel("Урон", _towerHandler.SniperUpgrades["damage"][_damageLevel + 1],
-            "Скорострельность", _towerHandler.SniperUpgrades["shootDelay"][_shootDelayLevel + 1],
-            "Скорость пуль", _towerHandler.SniperUpgrades["bulletSpeed"][_bulletSpeedLevel + 1], this);
     }
 
     public override void TryBuyUpgrade(int v)
@@ -51,4 +48,12 @@ public class SniperTower : ATower
             _towerHandler.SniperUpgrades["bulletSpeed"][_bulletSpeedLevel].x,
             transform.position, transform.rotation);
     }
+
+    public override void ShowPanelWithParams()
+    {
+        _towerUI.ShowUpgradePanel("Урон", _towerHandler.SniperUpgrades["damage"][_damageLevel + 1],
+                    "Скорострельность", _towerHandler.SniperUpgrades["shootDelay"][_shootDelayLevel + 1],
+                    "Скорость пуль", _towerHandler.SniperUpgrades["bulletSpeed"][_bulletSpeedLevel + 1], this);
+    }
+
 }

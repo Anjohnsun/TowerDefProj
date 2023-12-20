@@ -26,7 +26,6 @@ public class LevelManager : MonoBehaviour
     {
         if (enemyNumber <= 0 && _hp > 0)
             Win();
-        Debug.Log(enemyNumber);
     }
 
     public void Lose()
